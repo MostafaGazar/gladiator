@@ -7,7 +7,7 @@ A slave fragment to execute commands in a background thread and deliver results 
 
 ### Usage
 
-1. Extend from `com.mostafagazar.gladiator.BaseFragment`
+1. Extend from `com.mostafagazar.gladiator.BaseFragment` or copy it is basic content into your own BaseFragment
 2. Call `runOnBackgroundThread` and be certain that it is going to return the result back to the correct fragment, if the calling fragment got destroyed because of device orientation change for example.
 
 Complete example:
