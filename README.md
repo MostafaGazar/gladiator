@@ -1,6 +1,8 @@
 ## gladiator
 
-A slave fragment to execute commands in a background thread and deliver results back to the correct fragment instance
+A slave fragment to execute commands in a background thread and deliver results back to the correct fragment instance.
+
+It is based on RxAndroid, so there is potentional to grow with with it.
 
 [![Build Status](https://travis-ci.org/MostafaGazar/gladiator.svg)](https://travis-ci.org/MostafaGazar/gladiator)
 [![PayPal Donations](https://img.shields.io/badge/paypal-donate-yellow.svg?style=flat)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=mmegazar%40gmail%2ecom&lc=NZ&item_name=Mostafa%20Gazar&item_number=GitHub&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
