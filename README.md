@@ -38,13 +38,11 @@ private static class MyCallback implements GladiatorFragment.ICallback<MainActiv
 
     @Override
     public void onError(MainActivityFragment fragment, Throwable e) {
-        fragment.hideProgressDailog();
         Toast.makeText(fragment.getContext(), "onError", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onComplete(MainActivityFragment fragment) {
-        fragment.hideProgressDailog();
         Toast.makeText(fragment.getContext(), "onComplete", Toast.LENGTH_SHORT).show();
     }
 }
