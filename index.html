@@ -16,7 +16,7 @@
     <div class="wrapper">
       <header>
         <h1>Gladiator</h1>
-        <p>A slave fragment to execute commands in a background thread and deliver results back to the correct fragment instance</p>
+        <p></p>
 
         <p class="view"><a href="https://github.com/MostafaGazar/gladiator">View the Project on GitHub <small>MostafaGazar/gladiator</small></a></p>
 
@@ -29,75 +29,9 @@
       </header>
       <section>
         <h3>
-<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction</h3>
-
-<p>A slave fragment to execute commands in a background thread and deliver results back to the correct fragment instance.</p>
-
-<p>It is based on RxAndroid, so there is potential to grow with with it.</p>
-
-<ol>
-<li>Extend from <code>com.mostafagazar.gladiator.BaseFragment</code> or copy it is basic content into your own BaseFragment</li>
-<li>Call <code>runOnBackgroundThread</code> and be certain that it is going to return the result back to the correct fragment, if the calling fragment got destroyed because of device orientation change for example.</li>
-</ol>
-
-<p>Complete example:</p>
-
-<div class="highlight highlight-source-java"><pre>runOnBackgroundThread(<span class="pl-k">new</span> <span class="pl-smi">MyCommand</span>(), <span class="pl-k">new</span> <span class="pl-smi">MyCallback</span>());
-
-<span class="pl-k">private</span> <span class="pl-k">static</span> <span class="pl-k">class</span> <span class="pl-en">MyCommand</span> <span class="pl-k">implements</span> <span class="pl-e">GladiatorFragment</span>.<span class="pl-e">ICommand&lt;<span class="pl-smi">Boolean</span>&gt;</span> {
-    <span class="pl-k">@Override</span>
-    <span class="pl-k">public</span> <span class="pl-smi">Boolean</span> <span class="pl-en">execute</span>(<span class="pl-k">Subscriber&lt;? super <span class="pl-smi">Boolean</span>&gt;</span> <span class="pl-v">subscriber</span>) {
-        <span class="pl-k">try</span> {
-            <span class="pl-c">// Some serious work in progress!</span>
-            <span class="pl-smi">Thread</span><span class="pl-k">.</span>sleep(<span class="pl-c1">5000</span>);
-            <span class="pl-k">return</span> <span class="pl-c1">true</span>;
-        } <span class="pl-k">catch</span> (<span class="pl-smi">InterruptedException</span> e) {
-            subscriber<span class="pl-k">.</span>onError(e);
-            <span class="pl-k">return</span> <span class="pl-c1">false</span>;
-        }
-    }
-}
-
-<span class="pl-k">private</span> <span class="pl-k">static</span> <span class="pl-k">class</span> <span class="pl-en">MyCallback</span> <span class="pl-k">implements</span> <span class="pl-e">GladiatorFragment</span>.<span class="pl-e">ICallback&lt;<span class="pl-smi">MainActivityFragment</span>, <span class="pl-smi">Boolean</span>&gt;</span> {
-    <span class="pl-k">@Override</span>
-    <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">onNext</span>(<span class="pl-smi">MainActivityFragment</span> <span class="pl-v">fragment</span>, <span class="pl-smi">Boolean</span> <span class="pl-v">result</span>) {
-        <span class="pl-smi">Toast</span><span class="pl-k">.</span>makeText(fragment<span class="pl-k">.</span>getContext(), <span class="pl-s"><span class="pl-pds">"</span>onNext<span class="pl-pds">"</span></span>, <span class="pl-smi">Toast</span><span class="pl-c1"><span class="pl-k">.</span>LENGTH_SHORT</span>)<span class="pl-k">.</span>show();
-    }
-
-    <span class="pl-k">@Override</span>
-    <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">onError</span>(<span class="pl-smi">MainActivityFragment</span> <span class="pl-v">fragment</span>, <span class="pl-smi">Throwable</span> <span class="pl-v">e</span>) {
-        <span class="pl-smi">Toast</span><span class="pl-k">.</span>makeText(fragment<span class="pl-k">.</span>getContext(), <span class="pl-s"><span class="pl-pds">"</span>onError<span class="pl-pds">"</span></span>, <span class="pl-smi">Toast</span><span class="pl-c1"><span class="pl-k">.</span>LENGTH_SHORT</span>)<span class="pl-k">.</span>show();
-    }
-
-    <span class="pl-k">@Override</span>
-    <span class="pl-k">public</span> <span class="pl-k">void</span> <span class="pl-en">onComplete</span>(<span class="pl-smi">MainActivityFragment</span> <span class="pl-v">fragment</span>) {
-        <span class="pl-smi">Toast</span><span class="pl-k">.</span>makeText(fragment<span class="pl-k">.</span>getContext(), <span class="pl-s"><span class="pl-pds">"</span>onComplete<span class="pl-pds">"</span></span>, <span class="pl-smi">Toast</span><span class="pl-c1"><span class="pl-k">.</span>LENGTH_SHORT</span>)<span class="pl-k">.</span>show();
-    }
-}</pre></div>
-
-<h3>
-<a id="download" class="anchor" href="#download" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Download</h3>
-
-<p><a href="http://search.maven.org/#search%7Cga%7C1%7Cgladiator"><img src="https://img.shields.io/maven-central/v/com.mostafagazar/gladiator.svg" alt="Maven Central"></a></p>
-
-<div class="highlight highlight-source-groovy"><pre>dependencies {
-    <span class="pl-k">..</span>.
-    compile <span class="pl-s"><span class="pl-pds">'</span>com.mostafagazar:gladiator:1.0.0<span class="pl-pds">'</span></span>
-    <span class="pl-k">..</span>.
-}</pre></div>
-
-<h3>
-<a id="proguard" class="anchor" href="#proguard" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Proguard</h3>
-
-<p>If you're using proguard for code shrinking and obfuscation, make sure to add the following:</p>
-
-<pre lang="proguard"><code>   -keep class com.mostafagazar.** { *; }
-</code></pre>
-
-<h3>
 <a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Support or Contact</h3>
 
-<p>Having trouble or want a new feature? Get in touch or create an issue <a href="https://github.com/MostafaGazar/CustomShapeImageView/issues">https://github.com/MostafaGazar/CustomShapeImageView/issues</a></p>
+<p>Having trouble or want a new feature? Get in touch or create an issue <a href="https://github.com/MostafaGazar/gladiator/issues">https://github.com/MostafaGazar/gladiator/issues</a></p>
 
 <h3>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h3>
